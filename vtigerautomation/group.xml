@@ -1,0 +1,15 @@
+<suite name="Suite">
+	<groups>
+		<run>
+			<include name="smoke" />
+		</run>
+	</groups>
+	<test name="Test">
+		<classes>
+			<class name="testing_Extra.Sample_Test" />
+			<class name="testing_Extra.Demo_Test" />
+		</classes>
+	</test> <!--
+	Test -->
+</suite> <!--
+Suite -->

@@ -1,0 +1,9 @@
+<suite name="S">
+	<test name="t">
+		<parameter name="un" value="addmin" />
+		<parameter name="pwd" value="manager" />
+		<classes>
+			<class name="ddt_Extra.GetDataFromXmlFile"></class>
+		</classes>
+	</test>
+</suite>

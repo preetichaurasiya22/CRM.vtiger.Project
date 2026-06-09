@@ -1,0 +1,14 @@
+<suite name="Suite">
+	<test name="test">
+		<classes>
+			<class name="type_of_Execution.ContactTest" />
+			<methods>
+				<include name="createContactTest" />
+			</methods>
+			<class name="type_of_Execution.LeadTest" />
+			<class name="type_of_Execution.OrgTest" />
+		</classes>
+	</test> <!--
+	Test -->
+</suite> <!--
+Suite -->
