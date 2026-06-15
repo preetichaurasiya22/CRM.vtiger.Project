@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 	public class WebDriverUtility {
+		WebDriver driver;
 
 	public WebDriverUtility(WebDriver driver) {
 
@@ -21,11 +22,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 		element.sendKeys(un);
 
 	}
+//	maximize
+	public void maximizeWindow() {
+		driver.manage().window().maximize();
+	}
+	//implicit wait
+	public void implicitilyWait() {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+	}
 
 	// hover
 	public void hover(WebDriver driver, WebElement element) {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).perform();
+		
 	}
 
 //		right click
@@ -40,6 +50,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 		element.click();
 	}
+		
 
 	public void WaitAndClick(WebElement element) {
 

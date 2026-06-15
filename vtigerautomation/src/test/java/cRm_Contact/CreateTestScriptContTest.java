@@ -32,71 +32,84 @@
 
 package cRm_Contact;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.json.simple.parser.ParseException;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+import BaseUtility.BaseClass;
 import generic_utility.FileUtility;
 import object_repository.Contact_page;
 import object_repository.Home_Page;
 import object_repository.Login_Page;
+@Listeners(generic_utility.List_Imp.class)
+public class CreateTestScriptContTest extends BaseClass {
 
-public class CreateTestScriptContTest {
-
-	public static void main(String[] args) throws ParseException, IOException, InterruptedException {
-//		get data from json file
+	@Test
+	public void createContact() throws EncryptedDocumentException, FileNotFoundException, IOException {
+//	public static void main(String[] args) throws ParseException, IOException, InterruptedException {
+		ExtentTest test=report.createTest("createContact");
+		
+		//		get data from json file
 		FileUtility fUtil = new FileUtility();
-		String BROWSER = fUtil.getDataFromJsonfile("bro");
-		String URL = fUtil.getDataFromJsonfile("url");
-		String USERNAME = fUtil.getDataFromJsonfile("un");
-		String PASSWORD = fUtil.getDataFromJsonfile("pwd");
-//		GET DATA from excel
+//		String BROWSER = fUtil.getDataFromJsonfile("bro");
+//		String URL = fUtil.getDataFromJsonfile("url");
+//		String USERNAME = fUtil.getDataFromJsonfile("un");
+//		String PASSWORD = fUtil.getDataFromJsonfile("pwd");
+////		GET DATA from excel
 		String expectedLastName = fUtil.getDataFromExcelFile("contacts", 3, 0);
 
 //		 Browsersetup
 //		WebDriver driver = new ChromeDriver();
-		WebDriver driver = null;
-		if (BROWSER.equals("chrome")) {
-			driver = new ChromeDriver();
-		} else if (BROWSER.equals("edge")) {
-			driver = new EdgeDriver();
-		} else if (BROWSER.equals("safari")) {
-			driver = new SafariDriver();
-		} else if (BROWSER.equals("firefox")) {
-			driver = new FirefoxDriver();
-		} else {
-			driver = new ChromeDriver();
-		}
+//		WebDriver driver = null;
+//		if (BROWSER.equals("chrome")) {
+//			driver = new ChromeDriver();
+//		} else if (BROWSER.equals("edge")) {
+//			driver = new EdgeDriver();
+//		} else if (BROWSER.equals("safari")) {
+//			driver = new SafariDriver();
+//		} else if (BROWSER.equals("firefox")) {
+//			driver = new FirefoxDriver();
+//		} else {
+//			driver = new ChromeDriver();
+//		}
 
 		// Launch Browser
 
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+//		driver.manage().window().maximize();
+//		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
 //		launch application
 
-		driver.get(URL);
+//		driver.get(URL);
 
 		// Login to Vtiger CRM
 
 //		driver.findElement(By.name("user_name")).sendKeys("admin");
 //		driver.findElement(By.name("user_password")).sendKeys("manager");
 //		driver.findElement(By.id("submitButton")).click();
-		Login_Page lp = new Login_Page(driver);
-		lp.login(USERNAME, PASSWORD);
-
-		System.out.println("Login Successful");
-
-		// Navigate to Contacts Module
-
-//		driver.findElement(By.linkText("Contacts")).click();
+//		Login_Page lp = new Login_Page(driver);
+//		lp.login(USERNAME, PASSWORD);
+//
+//		System.out.println("Login Successful");
+//
+//		// Navigate to Contacts Module
+//
+////		driver.findElement(By.linkText("Contacts")).click();
 		Home_Page hp = new Home_Page(driver);
 		hp.getConLink().click();
 		Contact_page cp = new Contact_page(driver);
@@ -104,40 +117,41 @@ public class CreateTestScriptContTest {
 
 //		driver.findElement(By.cssSelector("img[title='Create Contact...']")).click();
 		cp.getClickplusicon().click();
-		
+
 		// create new contact
 
 //		String expectedLastName = "Sharma" ;
 
-		
 		cp.getLastname().sendKeys(expectedLastName);
-		
+
 		// Enter Mandatory Field
 		// driver.findElement(By.name("lastname")).sendKeys(expectedLastName);
 
 		// Save Contact
 //		driver.findElement(By.cssSelector("input[title='Save [Alt+S]']")).click();
-
 		cp.getSaveBtn().click();
 		System.out.println("Contact creation form submitted");
-		
-
 		// Validation
-
 //		String actualLastName = driver.findElement(By.id("dtlview_Last Name")).getText();
 		String actualLastName = cp.getviewlastname().getText();
 
-		if (actualLastName.equals(expectedLastName)) {
-			System.out.println("Contact Created Successfully");
-			System.out.println("Last Name Validation Passed");
-		} else {
-			System.out.println("Last Name Validation Failed");
-			System.out.println("Expected : " + expectedLastName);
-			System.out.println("Actual   : " + actualLastName);
-		}
+		boolean status=actualLastName.equals(actualLastName);
+		Assert.assertTrue(false);  //yha false h to fail hi hoga kyu ki hme status putt krna hoa h 
+//									//pr mujhe ss lena tha isliye
+//		if (actualLastName.equals(expectedLastName)) {
+//			System.out.println("Contact Created Successfully");
+//			
+//			System.out.println("Last Name Validation Passed");
+//			test.log(Status.PASS,"Contact is verified");
+//		} else {
+//			System.out.println("Last Name Validation Failed");
+//			System.out.println("Expected : " + expectedLastName);
+//			System.out.println("Actual   : " + actualLastName);
+//			test.log(Status.FAIL,"Contact is not verified");
+//		}
 
 		// Close Browser
-		driver.quit();
-		System.out.println("Browser closed successfully");
+//		driver.quit();
+//		System.out.println("Browser closed successfully");
 	}
 }

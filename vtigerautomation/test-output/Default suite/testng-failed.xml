@@ -3,11 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="helperAtribute.alwaysrunTest">
+      <class name="cRm_Contact.CreateTestScriptContTest">
         <methods>
-          <include name="test1"/>
+          <include name="createContact"/>
+          <include name="setUp"/>
+          <include name="login"/>
+          <include name="tearDown"/>
+          <include name="repBackup"/>
+          <include name="logout"/>
+          <include name="repConfig"/>
         </methods>
-      </class> <!-- helperAtribute.alwaysrunTest -->
+      </class> <!-- cRm_Contact.CreateTestScriptContTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
